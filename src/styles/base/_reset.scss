@@ -1,0 +1,111 @@
+// ============================================================
+// Base Reset & Global Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Box Sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Remove Default Margins
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// Smooth Scroll
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Body Styles
+body {
+  font-family: $font-roboto;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  color: $brand-text;
+  background-color: $brand-linen;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+// Heading Styles
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-oswald;
+  font-weight: $font-weight-medium;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: $brand-text;
+}
+
+// Link Styles
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color $transition-base $ease-expo-out;
+
+  &:hover {
+    color: $brand-secondary;
+  }
+}
+
+// Image Styles
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Form Elements
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+// Button Reset
+button {
+  @include button-reset;
+}
+
+// List Reset
+ul,
+ol {
+  list-style: none;
+}
+
+// Selection Styles
+::selection {
+  background-color: $brand-dark;
+  color: $brand-linen;
+}
+
+// Focus Styles
+:focus-visible {
+  outline: 2px solid $brand-dark;
+  outline-offset: 2px;
+}
+
+// Reduced Motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

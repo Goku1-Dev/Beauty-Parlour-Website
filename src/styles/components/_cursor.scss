@@ -1,0 +1,58 @@
+// ============================================================
+// Custom Cursor Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Custom Cursor Container
+.cursor-custom {
+  cursor: none;
+
+  // Disable on touch devices
+  @media (hover: none) and (pointer: coarse) {
+    cursor: auto;
+  }
+}
+
+// Cursor Dot
+.cursor-dot {
+  position: fixed;
+  width: $cursor-dot-size;
+  height: $cursor-dot-size;
+  background: $brand-dark-60;
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+
+  @media (hover: none) and (pointer: coarse) {
+    display: none;
+  }
+}
+
+// Cursor Ring
+.cursor-ring {
+  position: fixed;
+  width: $cursor-ring-size;
+  height: $cursor-ring-size;
+  border: 1px solid $brand-dark-40;
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor;
+  mix-blend-mode: difference;
+  transition: transform 0.3s $ease-expo-out,
+              width 0.3s $ease-expo-out,
+              height 0.3s $ease-expo-out;
+
+  @media (hover: none) and (pointer: coarse) {
+    display: none;
+  }
+
+  // Hover State
+  &.hover {
+    width: $cursor-ring-hover-size;
+    height: $cursor-ring-hover-size;
+    border-color: $brand-dark-40;
+  }
+}

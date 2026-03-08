@@ -1,0 +1,139 @@
+// ============================================================
+// Container & Layout Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Container
+.container {
+  @include container;
+}
+
+// Container Fluid
+.container-fluid {
+  width: 100%;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+
+  @include respond-to(md) {
+    padding-left: $spacing-6;
+    padding-right: $spacing-6;
+  }
+
+  @include respond-to(lg) {
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+  }
+}
+
+// Section
+.section {
+  position: relative;
+  padding-top: $spacing-20;
+  padding-bottom: $spacing-20;
+
+  @include respond-to(lg) {
+    padding-top: $spacing-24;
+    padding-bottom: $spacing-24;
+  }
+}
+
+// Section Header
+.section-header {
+  margin-bottom: $spacing-12;
+
+  &__title {
+    @include heading(xl);
+    margin-bottom: $spacing-4;
+  }
+
+  &__subtitle {
+    @include body-text(lg);
+    color: $brand-secondary;
+    max-width: 600px;
+  }
+}
+
+// Grid Layouts
+.grid {
+  display: grid;
+  gap: $spacing-6;
+}
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+// Flex Layouts
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-1 {
+  flex: 1;
+}
+
+// Gap Utilities
+.gap-2 {
+  gap: $spacing-2;
+}
+.gap-4 {
+  gap: $spacing-4;
+}
+.gap-6 {
+  gap: $spacing-6;
+}
+.gap-8 {
+  gap: $spacing-8;
+}
+
+// Spacing Utilities
+.py-8 {
+  padding-top: $spacing-8;
+  padding-bottom: $spacing-8;
+}
+.py-12 {
+  padding-top: $spacing-12;
+  padding-bottom: $spacing-12;
+}
+.py-16 {
+  padding-top: $spacing-16;
+  padding-bottom: $spacing-16;
+}
+.py-20 {
+  padding-top: $spacing-20;
+  padding-bottom: $spacing-20;
+}
+.px-4 {
+  padding-left: $spacing-4;
+  padding-right: $spacing-4;
+}
+.px-8 {
+  padding-left: $spacing-8;
+  padding-right: $spacing-8;
+}
+
+// Horizontal Scroll
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  @include hide-scrollbar;
+
+  > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}

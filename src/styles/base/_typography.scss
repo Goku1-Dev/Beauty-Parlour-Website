@@ -1,0 +1,147 @@
+// ============================================================
+// Typography Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Heading Classes
+.heading-3xl {
+  @include heading(3xl);
+}
+.heading-2xl {
+  @include heading(2xl);
+}
+.heading-xl {
+  @include heading(xl);
+}
+.heading-lg {
+  @include heading(lg);
+}
+.heading-base {
+  @include heading(base);
+}
+.heading-sm {
+  @include heading(sm);
+}
+.heading-xs {
+  @include heading(xs);
+}
+
+// Body Text Classes
+.text-lg {
+  @include body-text(lg);
+}
+.text-base {
+  @include body-text(base);
+}
+.text-sm {
+  @include body-text(sm);
+}
+
+// Font Weight Utilities
+.font-light {
+  font-weight: $font-weight-light;
+}
+.font-normal {
+  font-weight: $font-weight-normal;
+}
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+// Text Color Utilities
+.text-brand {
+  color: $brand-text;
+}
+.text-secondary {
+  color: $brand-secondary;
+}
+.text-muted {
+  color: $brand-muted;
+}
+
+// Text Alignment
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+// Text Transform
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+
+// Letter Spacing
+.tracking-tight {
+  letter-spacing: -0.02em;
+}
+.tracking-normal {
+  letter-spacing: 0;
+}
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+.tracking-wider {
+  letter-spacing: 0.1em;
+}
+
+// Line Height
+.leading-none {
+  line-height: 1;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.leading-snug {
+  line-height: 1.375;
+}
+.leading-normal {
+  line-height: 1.5;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-loose {
+  line-height: 2;
+}
+
+// Text Truncate
+.text-truncate {
+  @include text-truncate;
+}
+.text-truncate-2 {
+  @include text-truncate-multiline(2);
+}
+.text-truncate-3 {
+  @include text-truncate-multiline(3);
+}
+
+// Text Balance
+.text-balance {
+  text-wrap: balance;
+}
+
+// Gradient Text
+.text-gradient {
+  @include gradient-text;
+}

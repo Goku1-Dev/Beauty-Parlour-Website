@@ -1,0 +1,84 @@
+// ============================================================
+// Image Styles & Effects
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Image Hover Zoom
+.img-hover-zoom {
+  overflow: hidden;
+
+  img {
+    transition: transform $transition-slower $ease-expo-out;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+// Grayscale Hover
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: filter $transition-slow ease-out;
+
+  &:hover {
+    filter: grayscale(0%);
+  }
+}
+
+// Image Overlay
+.image-overlay {
+  position: relative;
+
+  &::after {
+    content: '';
+    @include absolute-fill;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+    pointer-events: none;
+  }
+}
+
+// Aspect Ratio Containers
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+.aspect-polaroid {
+  aspect-ratio: 2 / 3;
+}
+
+// Object Fit
+.object-cover {
+  object-fit: cover;
+}
+.object-contain {
+  object-fit: contain;
+}
+.object-fill {
+  object-fit: fill;
+}
+
+// Image Frame
+.image-frame {
+  position: relative;
+  padding: $spacing-3;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: $spacing-2;
+    left: $spacing-2;
+    right: $spacing-2;
+    bottom: $spacing-2;
+    border: 1px solid $brand-border;
+    pointer-events: none;
+  }
+}

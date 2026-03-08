@@ -1,0 +1,284 @@
+// ============================================================
+// Card Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Base Card
+.card {
+  position: relative;
+  background: $brand-linen;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include card-shadow;
+}
+
+// Article Card
+.article-card {
+  position: relative;
+  background: $brand-linen;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: transform $transition-slow $ease-expo-out,
+              box-shadow $transition-slow $ease-expo-out;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl;
+
+    .article-card__image img {
+      transform: scale(1.08);
+    }
+  }
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+
+    img {
+      @include image-cover;
+      transition: transform $transition-slower $ease-expo-out;
+    }
+  }
+
+  &__content {
+    padding: $spacing-5;
+  }
+
+  &__category {
+    font-family: $font-oswald;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $brand-muted;
+    margin-bottom: $spacing-2;
+  }
+
+  &__title {
+    font-family: $font-oswald;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    line-height: 1.2;
+    color: $brand-text;
+    margin-bottom: $spacing-2;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $brand-secondary;
+    line-height: 1.5;
+  }
+}
+
+// Polaroid Card (Lifestyle)
+.polaroid-card {
+  position: relative;
+  background: white;
+  padding: $spacing-3;
+  padding-bottom: $spacing-6;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: transform $transition-slow $ease-expo-out,
+              box-shadow $transition-slow $ease-expo-out;
+
+  &:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    z-index: 100 !important;
+  }
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    margin-bottom: $spacing-4;
+
+    img {
+      @include image-cover;
+      transition: transform $transition-slow $ease-expo-out;
+    }
+  }
+
+  &__title {
+    font-family: $font-oswald;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    line-height: 1.3;
+    color: $brand-text;
+    margin-bottom: $spacing-2;
+  }
+
+  &__excerpt {
+    font-size: $font-size-sm;
+    color: $brand-secondary;
+    line-height: 1.5;
+  }
+}
+
+// Design Card (Mosaic)
+.design-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    @include absolute-fill;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity $transition-slow $ease-expo-out;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+
+    .design-card__image {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .design-card__content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__image {
+    @include image-cover;
+    filter: grayscale(100%);
+    transition: filter $transition-slow $ease-expo-out,
+                transform $transition-slow $ease-expo-out;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $spacing-6;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity $transition-slow $ease-expo-out,
+                transform $transition-slow $ease-expo-out;
+  }
+
+  &__title {
+    font-family: $font-oswald;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-medium;
+    color: white;
+    margin-bottom: $spacing-2;
+  }
+
+  &__quote {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+    line-height: 1.5;
+  }
+}
+
+// Instagram Card
+.instagram-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    @include absolute-fill;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity $transition-base $ease-expo-out;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+
+    .instagram-card__image {
+      transform: scale(1.1);
+    }
+
+    .instagram-card__overlay {
+      opacity: 1;
+    }
+  }
+
+  &__image {
+    @include image-cover;
+    transition: transform $transition-slow $ease-expo-out;
+  }
+
+  &__overlay {
+    @include absolute-center;
+    z-index: 2;
+    @include flex-center;
+    gap: $spacing-2;
+    color: white;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    opacity: 0;
+    transition: opacity $transition-base $ease-expo-out;
+  }
+}
+
+// Author Card
+.author-card {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: transform $transition-base $ease-expo-out;
+
+  &:hover {
+    transform: translateY(-8px);
+
+    .author-card__avatar {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: $radius-full;
+    overflow: hidden;
+    margin: 0 auto $spacing-4;
+    transition: box-shadow $transition-base $ease-expo-out;
+
+    img {
+      @include image-cover;
+    }
+  }
+
+  &__name {
+    font-family: $font-oswald;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    color: $brand-text;
+    margin-bottom: $spacing-1;
+  }
+
+  &__role {
+    font-size: $font-size-sm;
+    color: $brand-muted;
+    margin-bottom: $spacing-2;
+  }
+
+  &__articles {
+    font-size: $font-size-xs;
+    color: $brand-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}

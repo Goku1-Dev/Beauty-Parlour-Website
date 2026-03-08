@@ -1,0 +1,51 @@
+// ============================================================
+// Magnetic Effect Styles
+// ============================================================
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use 'sass:color';
+
+.magnetic {
+  transition: transform 0.3s $ease-expo-out;
+  will-change: transform;
+}
+
+// Magnetic Button
+.magnetic-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-4 $spacing-8;
+  background: $brand-dark;
+  color: $brand-linen;
+  font-family: $font-oswald;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: $radius-full;
+  transition: transform 0.3s $ease-expo-out,
+              background-color $transition-base $ease-expo-out,
+              box-shadow $transition-base $ease-expo-out;
+  will-change: transform;
+
+  &:hover {
+    background: color.adjust($brand-dark, $lightness: 10%);
+    box-shadow: $shadow-lg;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Magnetic Link
+.magnetic-link {
+  position: relative;
+  display: inline-block;
+  padding: $spacing-2 0;
+  transition: transform 0.3s $ease-expo-out;
+  will-change: transform;
+  @include animated-underline;
+}

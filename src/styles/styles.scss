@@ -1,0 +1,118 @@
+// ============================================================
+// Main Styles Entry Point
+// Exhibition Style Template - TypeScript + SCSS
+// ============================================================
+
+// ============================================================
+// Utilities (@use rules MUST come first before everything)
+// ============================================================
+@use 'utils/variables';
+@use 'utils/mixins';
+
+// ============================================================
+// Base
+// ============================================================
+@use 'base/reset';
+@use 'base/typography';
+
+// ============================================================
+// Components
+// ============================================================
+@use 'components/cursor';
+@use 'components/noise';
+@use 'components/magnetic';
+@use 'components/reveal';
+@use 'components/cards';
+@use 'components/images';
+@use 'components/buttons';
+
+// ============================================================
+// Layout
+// ============================================================
+@use 'layout/container';
+@use 'layout/navigation';
+
+// ============================================================
+// Pages
+// ============================================================
+@use 'pages/home';
+
+// ============================================================
+// Tailwind Directives (AFTER all @use rules)
+// ============================================================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// ============================================================
+// Tailwind Customizations
+// ============================================================
+@layer base {
+  :root {
+    --background: 42 23% 93%;
+    --foreground: 0 0% 9%;
+    --card: 42 23% 93%;
+    --card-foreground: 0 0% 9%;
+    --popover: 42 23% 93%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 42 18% 88%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 42 18% 88%;
+    --muted-foreground: 0 0% 33%;
+    --accent: 42 18% 88%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 42 10% 90%;
+    --input: 42 10% 90%;
+    --ring: 0 0% 20%;
+    --radius: 0.5rem;
+    --sidebar-background: 42 23% 93%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 0 0% 20%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 42 18% 88%;
+    --sidebar-accent-foreground: 0 0% 9%;
+    --sidebar-border: 42 10% 90%;
+    --sidebar-ring: 0 0% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  // Expo easing
+  .ease-expo-out {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ease-smooth {
+    transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .ease-dramatic {
+    transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
+  // Perspective
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  // Transform style
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  // Backface visibility
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
