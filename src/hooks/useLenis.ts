@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
 
 export const useLenis = () => {
   const lenisRef = useRef<Lenis | null>(null);
@@ -21,14 +22,15 @@ export const useLenis = () => {
       touchMultiplier: 2,
     });
 
-    function raf(time: number) {
-      lenisRef.current?.raf(time);
-      requestAnimationFrame(raf);
-    }
+    const updateLenis = (time: number) => {
+      lenisRef.current?.raf(time * 1000);
+    };
 
-    requestAnimationFrame(raf);
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(updateLenis);
       lenisRef.current?.destroy();
     };
   }, []);

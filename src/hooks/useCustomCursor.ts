@@ -5,6 +5,10 @@ export const useCustomCursor = () => {
   const ringRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  
+  const isHoveringRef = useRef(false);
+  const isVisibleRef = useRef(false);
+  
   const mousePos = useRef({ x: 0, y: 0 });
   const dotPos = useRef({ x: 0, y: 0 });
   const ringPos = useRef({ x: 0, y: 0 });
@@ -20,11 +24,21 @@ export const useCustomCursor = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    };
+    
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
 
     const handleHoverStart = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -36,11 +50,15 @@ export const useCustomCursor = () => {
         target.classList.contains('magnetic') ||
         target.classList.contains('cursor-hover')
       ) {
+        isHoveringRef.current = true;
         setIsHovering(true);
       }
     };
 
-    const handleHoverEnd = () => setIsHovering(false);
+    const handleHoverEnd = () => {
+      isHoveringRef.current = false;
+      setIsHovering(false);
+    };
 
     const animate = () => {
       // Smooth interpolation for dot
@@ -52,11 +70,11 @@ export const useCustomCursor = () => {
       ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.1;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${dotPos.current.x - 3}px, ${dotPos.current.y - 3}px)`;
+        dotRef.current.style.transform = `translate3d(${dotPos.current.x - 3}px, ${dotPos.current.y - 3}px, 0)`;
       }
       if (ringRef.current) {
-        const size = isHovering ? 48 : 32;
-        ringRef.current.style.transform = `translate(${ringPos.current.x - size / 2}px, ${ringPos.current.y - size / 2}px)`;
+        const size = isHoveringRef.current ? 48 : 32;
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x - size / 2}px, ${ringPos.current.y - size / 2}px, 0)`;
         ringRef.current.style.width = `${size}px`;
         ringRef.current.style.height = `${size}px`;
       }
@@ -82,7 +100,7 @@ export const useCustomCursor = () => {
         cancelAnimationFrame(rafId.current);
       }
     };
-  }, [isVisible, isHovering]);
+  }, []);
 
   return { dotRef, ringRef, isVisible, isHovering };
 };

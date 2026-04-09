@@ -14,17 +14,15 @@
   }
 }
 
-// Cursor Dot
 .cursor-dot {
   position: fixed;
   width: $cursor-dot-size;
   height: $cursor-dot-size;
-  background: $brand-dark-60;
+  background: rgba(10, 10, 10, 0.8);
   border-radius: $radius-full;
   pointer-events: none;
   z-index: $z-cursor;
-  mix-blend-mode: difference;
-  transition: transform 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
 
   @media (hover: none) and (pointer: coarse) {
     display: none;
@@ -36,14 +34,13 @@
   position: fixed;
   width: $cursor-ring-size;
   height: $cursor-ring-size;
-  border: 1px solid $brand-dark-40;
+  border: 1px solid rgba(10, 10, 10, 0.4);
   border-radius: $radius-full;
   pointer-events: none;
   z-index: $z-cursor;
-  mix-blend-mode: difference;
-  transition: transform 0.3s $ease-expo-out,
-              width 0.3s $ease-expo-out,
-              height 0.3s $ease-expo-out;
+  transition: width 0.3s $ease-expo-out,
+              height 0.3s $ease-expo-out,
+              opacity 0.3s $ease-expo-out;
 
   @media (hover: none) and (pointer: coarse) {
     display: none;

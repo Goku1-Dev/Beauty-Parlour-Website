@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -55,6 +55,12 @@ const LatestArticles = () => {
         }
       );
 
+      // Create optimized quickTo setters for card skew
+      const cards = track.querySelectorAll('.article-card');
+      const skewSetters = Array.from(cards).map(card => 
+        gsap.quickTo(card, "skewX", { duration: 0.3, ease: "power2.out" })
+      );
+
       // Horizontal scroll animation
       const scrollTween = gsap.to(track, {
         x: -scrollWidth,
@@ -71,14 +77,8 @@ const LatestArticles = () => {
 
             // Tilt cards based on scroll velocity
             const velocity = self.getVelocity() / 1000;
-            const cards = track.querySelectorAll('.article-card');
-            cards.forEach((card) => {
-              gsap.to(card, {
-                skewX: Math.max(-10, Math.min(10, velocity * 0.5)),
-                duration: 0.3,
-                ease: 'power2.out',
-              });
-            });
+            const targetSkew = Math.max(-10, Math.min(10, velocity * 0.5));
+            skewSetters.forEach(setTo => setTo(targetSkew));
           },
         },
       });
@@ -242,7 +242,7 @@ const LatestArticles = () => {
           </div>
         </div>
       ) : (
-        <>
+        <div className="desktop-scroll-wrapper">
           {/* Horizontal scroll container */}
           <div ref={triggerRef} className="relative min-h-screen flex items-center">
             <div
@@ -304,7 +304,7 @@ const LatestArticles = () => {
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-        </>
+        </div>
       )}
     </section>
   );

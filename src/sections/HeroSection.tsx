@@ -40,11 +40,11 @@ const HeroSection = () => {
         '-=1'
       );
 
-      // Content blur fade in
+      // Content fade up
       entryTl.fromTo(
         contentRef.current,
-        { filter: 'blur(10px)', opacity: 0 },
-        { filter: 'blur(0px)', opacity: 1, duration: 0.8, ease: 'none' },
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
         '-=0.6'
       );
 
@@ -84,6 +84,16 @@ const HeroSection = () => {
     return () => ctx.revert();
   }, []);
 
+  const rotateXTo = useRef<gsap.QuickToFunc | null>(null);
+  const rotateYTo = useRef<gsap.QuickToFunc | null>(null);
+
+  useEffect(() => {
+    if (imageRef.current) {
+      rotateXTo.current = gsap.quickTo(imageRef.current, 'rotateX', { duration: 0.5, ease: 'power2.out' });
+      rotateYTo.current = gsap.quickTo(imageRef.current, 'rotateY', { duration: 0.5, ease: 'power2.out' });
+    }
+  }, []);
+
   // Liquid distortion effect on mouse move (desktop only)
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!imageRef.current || window.innerWidth < 1024) return;
@@ -92,23 +102,19 @@ const HeroSection = () => {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    gsap.to(imageRef.current, {
-      rotateY: x * 5,
-      rotateX: -y * 5,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
+    if (rotateXTo.current && rotateYTo.current) {
+      rotateXTo.current(-y * 5);
+      rotateYTo.current(x * 5);
+    }
   };
 
   const handleMouseLeave = () => {
     if (!imageRef.current) return;
 
-    gsap.to(imageRef.current, {
-      rotateY: 0,
-      rotateX: 0,
-      duration: 0.8,
-      ease: 'elastic.out(1, 0.5)',
-    });
+    if (rotateXTo.current && rotateYTo.current) {
+      rotateXTo.current(0);
+      rotateYTo.current(0);
+    }
   };
 
   if (!heroConfig.titleLine1 && !heroConfig.titleLine2) {

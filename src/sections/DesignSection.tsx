@@ -99,7 +99,7 @@ const DesignSection = () => {
         <div ref={titleRef} className="mb-8 sm:mb-12 lg:mb-16">
           <h2 className="font-oswald font-extralight text-4xl sm:text-5xl lg:text-6xl xl:text-8xl text-brand-text relative inline-block">
             {designConfig.sectionTitle}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-linen/50 to-transparent mix-blend-overlay pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-linen/50 to-transparent pointer-events-none" />
           </h2>
         </div>
 

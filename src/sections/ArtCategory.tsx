@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { artCategoryConfig } from "@/config";
@@ -69,7 +69,7 @@ const ArtCategory = () => {
     "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1200&h=750&fit=crop";
 
   // GSAP animations
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

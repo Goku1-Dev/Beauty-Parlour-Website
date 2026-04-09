@@ -19,19 +19,16 @@ const GreenTribe = () => {
     }
 
     const ctx = gsap.context(() => {
-      // Video playback rate based on scroll
+      // Video parallax scrub instead of playbackRate parsing
       if (videoRef.current) {
         gsap.to(videoRef.current, {
+          yPercent: 20,
+          ease: 'none',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
             scrub: true,
-            onUpdate: (self) => {
-              if (videoRef.current) {
-                videoRef.current.playbackRate = 0.5 + self.progress * 1.5;
-              }
-            },
           },
         });
       }
@@ -102,10 +99,7 @@ const GreenTribe = () => {
             {greenTribeConfig.members.map((member) => (
               <article
                 key={member.id}
-                className="tribe-card glass p-4 sm:p-6 lg:p-8 group cursor-hover backdrop-blur-xl"
-                style={{
-                  backdropFilter: 'blur(20px)',
-                }}
+                className="tribe-card glass p-4 sm:p-6 lg:p-8 group cursor-hover"
               >
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                   {/* Avatar */}
@@ -154,7 +148,7 @@ const GreenTribe = () => {
 
           {/* Sidebar - 4 columns */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit mt-6 sm:mt-8 lg:mt-0">
-            <div className="glass p-4 sm:p-6 lg:p-8 backdrop-blur-xl">
+            <div className="glass p-4 sm:p-6 lg:p-8">
               <h3 className="font-oswald text-lg sm:text-xl text-brand-text mb-3 sm:mb-4">
                 {greenTribeConfig.joinTitle}
               </h3>
